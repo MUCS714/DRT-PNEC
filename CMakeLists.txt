@@ -2,17 +2,17 @@ cmake_minimum_required(VERSION 2.8.3)
 # set project's name
 project(drt_vio)
 
-include(CheckCXXCompilerFlag)  # 改动
+include(CheckCXXCompilerFlag)  
 CHECK_CXX_COMPILER_FLAG("-march=native" COMPILER_SUPPORTS_MARCH_NATIVE)
 if(COMPILER_SUPPORTS_MARCH_NATIVE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
 endif()
 
 set(CMAKE_BUILD_TYPE "Release")  # Debug
-set(CMAKE_CXX_FLAGS "-std=c++17")   # 改动
-#set(CMAKE_CXX_STANDARD 17)          # 改动
-#set(CMAKE_CXX_STANDARD_REQUIRED ON) # 改动
-#set(CMAKE_CXX_EXTENSIONS OFF)       # 改动
+set(CMAKE_CXX_FLAGS "-std=c++17")   
+#set(CMAKE_CXX_STANDARD 17)          
+#set(CMAKE_CXX_STANDARD_REQUIRED ON) 
+#set(CMAKE_CXX_EXTENSIONS OFF)      
 #-DEIGEN_USE_MKL_ALL")
 # eigen 3.3以上版本加-mavx -mfma
 #set(CMAKE_CXX_FLAGS_RELEASE "-O3  -g -DEIGEN_NO_DEBUG -fopenmp")
@@ -25,9 +25,9 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 add_definitions("-D SOPHUS_USE_BASIC_LOGGING")
 #add_definitions(-DBOOST_ERROR_CODE_HEADER_ONLY)
-add_definitions(-DBOOST_LOG_DYN_LINK)  # 改动
+add_definitions(-DBOOST_LOG_DYN_LINK)  
 
-add_subdirectory(thirdparty/basalt EXCLUDE_FROM_ALL) # 改动
+add_subdirectory(thirdparty/basalt EXCLUDE_FROM_ALL) 
 
 find_package(Gflags)
 find_package(Glog)
@@ -37,8 +37,8 @@ find_package(Ceres REQUIRED)
 find_package(TBB REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Pangolin REQUIRED)
-find_package(Boost COMPONENTS filesystem log log_setup REQUIRED) # 改动
-find_package(SuiteSparse) # 改动
+find_package(Boost COMPONENTS filesystem log log_setup REQUIRED) 
+find_package(SuiteSparse) 
 
 include_directories(
   include
@@ -54,11 +54,11 @@ include_directories(
   ${TBB_INCLUDE_DIR}
   ${EIGEN3_INCLUDE_DIR}
   ${CERES_INCLUDE_DIRS}
-  ${OpenCV_INCLUDE_DIRS}        # 改动
-  ${SUITESPARSE_INCLUDE_DIRS}   # 改动
+  ${OpenCV_INCLUDE_DIRS}        
+  ${SUITESPARSE_INCLUDE_DIRS}   
   ${Boost_INCLUDE_DIR}
   ${Pangolin_INCLUDE_DIRS}
-  ${PROJECT_SOURCE_DIR}/thirdparty/basalt/include                  # 以下都是改动
+  ${PROJECT_SOURCE_DIR}/thirdparty/basalt/include                  
   ${PROJECT_SOURCE_DIR}/thirdparty/basalt/thirdparty/basalt-headers/include
   ${PROJECT_SOURCE_DIR}/third_party/basalt/thirdparty/basalt-headers/thirdparty/Sophus
   ${PROJECT_SOURCE_DIR}/thirdparty/basalt/thirdparty/basalt-headers/thirdparty/cereal/include
@@ -91,7 +91,7 @@ ADD_LIBRARY(MyVio SHARED
         src/initMethod/polynomial.cc
         src/visualization/visualize.cpp
         src/factor/imuIntegFactor.cc
-        src/features/base_matcher.cc          # 以下都是改动
+        src/features/base_matcher.cc          
         src/features/tracking_matcher.cc
         src/frames/base_frame.cc
         src/frames/keypoints.cc
@@ -108,7 +108,7 @@ ADD_LIBRARY(MyVio SHARED
         src/common/visualization.cc
         src/rel_pose_estimation/essential_matrix_methods.cc
         src/rel_pose_estimation/frame2frame.cc
-        src/rel_pose_estimation/pnec.cc        # 这里出问题
+        src/rel_pose_estimation/pnec.cc        
         src/visualization/visualize.cpp
         src/io/config.cc
         src/io/dataset_loader.cc
@@ -121,7 +121,7 @@ target_link_libraries(MyVio
         ${GFLAGS_LIBRARIES}
         ${Boost_LIBRARIES}
         ${STD_CXX_FS}
-        ${SUITESPARSE_LIBRARIES}    # 以下都是改动
+        ${SUITESPARSE_LIBRARIES}    
         ${Boost_FILESYSTEM_LIBRARY} 
         ${Boost_LOG_LIBRARY}
         ${Boost_LOG_SETUP_LIBRARY}
@@ -129,7 +129,7 @@ target_link_libraries(MyVio
         camera_model
         #umfpack
         -lboost_system
-        opengv            # 只是因为顺序不一样？
+        opengv            
         basalt
         )
 
