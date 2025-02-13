@@ -257,9 +257,9 @@ namespace DRT
             // Stack to C/D matrix
             // lambda*s + phi*dthetaxy + zeta*ba = psi
             cv::Mat lambda = (pc2-pc1)*dt23 + (pc2-pc3)*dt12;
-            cv::Mat phi = 0.5*(dt12*dt12*dt23 + dt12*dt23*dt23)*Rwi*SkewSymmetricMatrix(GI);  // note: this has a '-', different to paper
+            cv::Mat phi = 0.5*(dt12*dt12*dt23 + dt12*dt23*dt23)*Rwi*SkewSymmetricMatrix(GI);  
             cv::Mat psi = (Rc2-Rc1)*pbc_*dt23 + Rc1*dp12*dt23 - (Rc3-Rc2)*pbc_*dt12
-                        - Rc2*dp23*dt12 - Rc1*dv12*dt23*dt12 - 0.5*Rwi*GI*(dt12*dt12*dt23 + dt12*dt23*dt23); // note:  - paper
+                        - Rc2*dp23*dt12 - Rc1*dv12*dt23*dt12 - 0.5*Rwi*GI*(dt12*dt12*dt23 + dt12*dt23*dt23);
             lambda.copyTo(C.rowRange(3*i+0,3*i+3).col(0));
             phi.colRange(0,2).copyTo(C.rowRange(3*i+0,3*i+3).colRange(1,3)); //only the first 2 columns, third term in dtheta is zero, here compute dthetaxy 2x1.
             psi.copyTo(D.rowRange(3*i+0,3*i+3));
