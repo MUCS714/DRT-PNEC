@@ -16,7 +16,7 @@ We propose a new VIO initialization method by extending the [rotation-translatio
 * opengv 1.0.0
 * Cere-solver 1.14.0 [Ceres Installation](http://ceres-solver.org/installation.html)
 * basalt [gitlab](https://gitlab.com/VladyslavUsenko/basalt/-/tree/master/)
-  * clone into ```third_party/basalt``` with git submodules \
+  * clone into ```thirdparty/basalt``` with git submodules \
     ```git clone --recursive https://gitlab.com/VladyslavUsenko/basalt.git```
   * follow their instructions to install  
 
